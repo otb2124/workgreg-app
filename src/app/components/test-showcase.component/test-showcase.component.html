@@ -1,0 +1,129 @@
+<p-toast></p-toast>
+
+    <div class="min-h-screen bg-slate-900 text-slate-100 p-8 space-y-8">
+      
+      <!-- Header / Banner Section -->
+      <header class="flex flex-col md:flex-row items-center justify-between gap-4 p-6 bg-slate-800/80 rounded-2xl border border-slate-700 shadow-xl backdrop-blur-md">
+        <div>
+          <h1 class="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
+            Tailwind v4 + PrimeNG Integration Test
+          </h1>
+          <p class="text-slate-400 text-sm mt-1">
+            Testing layout utilities, theme CSS variables, and PrimeNG UI controls.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <p-button 
+            label="Trigger Toast" 
+            icon="pi pi-bell" 
+            severity="info" 
+            (click)="showToast()" />
+          <p-button 
+            label="Tauri Action" 
+            icon="pi pi-desktop" 
+            severity="success" />
+        </div>
+      </header>
+
+      <!-- Grid Layout Test: Tailwind Utilities & Custom Theme Variables -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Box 1: Tailwind v4 Color & Flex Test -->
+        <div class="p-6 rounded-xl bg-gradient-to-br from-indigo-900/50 to-slate-800 border border-indigo-500/30 shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 text-indigo-400 mb-2">
+              <i class="pi pi-palette text-xl"></i>
+              <h3 class="font-bold text-lg text-white">Tailwind Utilities</h3>
+            </div>
+            <p class="text-slate-300 text-sm">
+              Verifies grid, gradients, text clipping, and flexbox utilities are actively compiled.
+            </p>
+          </div>
+          <div class="mt-4 flex gap-2">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+              Flex / Grid
+            </span>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+              Gradient
+            </span>
+          </div>
+        </div>
+
+        <!-- Box 2: Custom Safelisted Theme Variables Test -->
+        <div class="p-6 rounded-xl bg-theme-muted border border-theme-border shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 text-theme mb-2">
+              <i class="pi pi-cog text-xl"></i>
+              <h3 class="font-bold text-lg text-white">Theme Variables</h3>
+            </div>
+            <p class="text-slate-300 text-sm">
+              Verifies <code class="text-amber-400">tailwind.config.js</code> safelisted classes (e.g. <code class="text-amber-400">bg-theme-muted</code>, <code class="text-amber-400">border-theme-border</code>).
+            </p>
+          </div>
+          <div class="mt-4">
+            <div class="h-2 w-full bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-full bg-theme w-2/3"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Box 3: Form Controls & Inputs Test -->
+        <div class="p-6 rounded-xl bg-slate-800 border border-slate-700 shadow-lg flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 text-purple-400 mb-2">
+              <i class="pi pi-check-square text-xl"></i>
+              <h3 class="font-bold text-lg text-white">Input Control</h3>
+            </div>
+            <div class="space-y-3 mt-3">
+              <span class="p-input-icon-left w-full">
+                <input 
+                  type="text" 
+                  pInputText 
+                  [(ngModel)]="inputValue" 
+                  placeholder="Type to test binding..." 
+                  class="w-full p-inputtext-sm bg-slate-900 border-slate-700 text-white" />
+              </span>
+              <p class="text-xs text-slate-400">Value: <span class="text-amber-400 font-mono">{{ inputValue || 'empty' }}</span></p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Table Section: PrimeNG Table styled inside Tailwind container -->
+      <section class="p-6 bg-slate-800 rounded-xl border border-slate-700 shadow-lg">
+        <h2 class="text-xl font-bold mb-4 text-slate-100 flex items-center gap-2">
+          <i class="pi pi-table text-indigo-400"></i>
+          PrimeNG Data Table Test
+        </h2>
+
+        <p-table [value]="users" [rows]="3" [paginator]="true" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Status</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-user>
+            <tr>
+              <td class="font-mono text-slate-400">#{{ user.id }}</td>
+              <td class="font-medium text-slate-200">{{ user.name }}</td>
+              <td>
+                <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-300">
+                  {{ user.role }}
+                </span>
+              </td>
+              <td>
+                <p-tag 
+                  [value]="user.status" 
+                  [severity]="user.status === 'Active' ? 'success' : 'warn'">
+                </p-tag>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </section>
+
+    </div>
